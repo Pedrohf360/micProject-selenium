@@ -14,5 +14,20 @@ public class JSONFileWrite {
 		
 		obj.put("Name", "crunchify.com");
 		obj.put("Author", "App Shah");
+		
+		JSONArray company = new JSONArray();
+		company.add("Company: eBay");
+		company.add("Company: PayPal");
+		company.add("Company: Google");
+		
+		objJson.put("Company List", company);
+		
+		try (FileWriter file = new FileWriter("/Users/<username>/Documents/file1.txt"))
+		{
+				file.write(obj.toJSONString());
+				System.out.println("Successfully copied JSON Object to File...");
+				System.out.println("\nJSON Object: " + obj);
+			
+		}
 	}
 }
