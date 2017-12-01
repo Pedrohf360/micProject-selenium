@@ -22,27 +22,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 //driver.manage().window().setPosition(p);
 
 public class IPTU {
+	
+	private WebElement link;
 
-	public static void main(String[] args) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+	private WebDriver driver;
 
-System.setProperty("webdriver.gecko.driver", "C:\\Users\\murdock\\Downloads\\selenium-java-3.8.0\\geckodriver.exe");
+	private String nomeImagemCaptcha;
+	
+	public IPTU() throws IOException, InterruptedException
+	{
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\murdock\\Downloads\\selenium-java-3.8.0\\geckodriver.exe");
 		
-		WebDriver driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
 		
 		driver.get("http://iptuonline.siatu.pbh.gov.br/IptuOnline/index.xhtml");
 		
 		Thread.sleep(8000);
-		
-		WebElement link;
-		
-		link = driver.findElement(By.id("cpf"));
-	
-		
-		link.clear();
-		link.sendKeys("01873521600");
-		
-		Thread.sleep(5000);
 		
 		link = driver.findElement(By.id("CaptchaImgID"));
 		
@@ -60,11 +55,89 @@ System.setProperty("webdriver.gecko.driver", "C:\\Users\\murdock\\Downloads\\sel
 			    linkWidth, linkHeight);
 		ImageIO.write(eleScreenshot, "png", screenshot);
 		
-		Thread.sleep(2000);
-		
-		File screenshotLocation = new File("C:\\Users\\murdock\\Desktop\\Captcha_screenshot.png");
+		File screenshotLocation = new File("C:\\micProject\\IPTUteste\\bin");
 		FileUtils.copyToDirectory(screenshot, screenshotLocation);
-		System.out.println("TERMINEI");
+		
+		this.nomeImagemCaptcha = screenshot.getName();
+	}
+	
+	public String getNomeImagemCaptcha()
+	{
+		return this.nomeImagemCaptcha;
+	}
+	
+	public void ConsultarIndiceCad(String indCad, String captcha)
+	{
+		driver.navigate();
+		
+		// Procura elemento textBox para preencher índice cadastral.
+		link = driver.findElement(By.id("inputIndice"));
+		
+		link.clear();
+		link.sendKeys(indCad);
+		
+		// Procura elemento textBox para preencher captcha, que será salvo no construtor desta classe.
+		link = driver.findElement(By.id("CaptchaID"));
+		
+		link.clear();
+		link.sendKeys(captcha);
+		
+		link = driver.findElement(By.id("pesquisar"));
+		
+		link.click();
 	}
 
+	public void ConsultarCpf(String numCpf, String numCepImovel, String captcha)
+	{
+		driver.navigate();
+		
+		// Procura elemento textBox para preencher cpf.
+		link = driver.findElement(By.id("cpf"));
+		
+		// .clear é necessário para digitar algo no campo cpf.
+		link.clear();
+		link.sendKeys(numCpf);
+		
+		// Procura elemento textBox para preencher cep.
+		link = driver.findElement(By.id("cep"));
+		
+		link.clear();
+		link.sendKeys(numCepImovel);
+		
+		// Procura elemento textBox para preencher captcha, que será salvo no construtor desta classe.
+		link = driver.findElement(By.id("CaptchaID"));
+		
+		link.clear();
+		link.sendKeys(captcha);
+		
+		link = driver.findElement(By.id("pesquisar"));
+		
+		link.click();
+	}
+
+	public void ConsultarCpnj(String cnpj, String numCepImovel, String captcha)
+	{
+		driver.navigate();
+		
+		link = driver.findElement(By.id("cnpj"));
+		
+		link.clear();
+		link.sendKeys(cnpj);
+		
+		// Procura elemento textBox para preencher cep.
+		link = driver.findElement(By.id("cep"));
+		
+		link.clear();
+		link.sendKeys(numCepImovel);
+		
+		// Procura elemento textBox para preencher captcha, que será salvo no construtor desta classe.
+		link = driver.findElement(By.id("CaptchaID"));
+		
+		link.clear();
+		link.sendKeys(captcha);
+		
+		link = driver.findElement(By.id("pesquisar"));
+		
+		link.click();
+	}
 }
