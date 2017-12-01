@@ -1,5 +1,6 @@
 package teste;
 
+import org.openqa.selenium.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,15 +30,21 @@ public class IPTU {
 
 	private String nomeImagemCaptcha;
 	
+	private Point posicaoOriginalTela;
+	
 	public IPTU() throws IOException, InterruptedException
-	{
+	{	
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\murdock\\Downloads\\selenium-java-3.8.0\\geckodriver.exe");
 		
 		driver = new FirefoxDriver();
 		
+		this.posicaoOriginalTela = driver.manage().window().getPosition();
+		
+		Point foraTela = new Point(-2000,0); 
+		
 		driver.get("http://iptuonline.siatu.pbh.gov.br/IptuOnline/index.xhtml");
 		
-		Thread.sleep(8000);
+		driver.manage().window().setPosition(foraTela);
 		
 		link = driver.findElement(By.id("CaptchaImgID"));
 		
@@ -85,6 +92,8 @@ public class IPTU {
 		link = driver.findElement(By.id("pesquisar"));
 		
 		link.click();
+		
+		driver.manage().window().setPosition(this.posicaoOriginalTela);
 	}
 
 	public void ConsultarCpf(String numCpf, String numCepImovel, String captcha)
@@ -113,6 +122,8 @@ public class IPTU {
 		link = driver.findElement(By.id("pesquisar"));
 		
 		link.click();
+		
+		driver.manage().window().setPosition(this.posicaoOriginalTela);
 	}
 
 	public void ConsultarCpnj(String cnpj, String numCepImovel, String captcha)
@@ -139,5 +150,7 @@ public class IPTU {
 		link = driver.findElement(By.id("pesquisar"));
 		
 		link.click();
+		
+		driver.manage().window().setPosition(this.posicaoOriginalTela);
 	}
 }
