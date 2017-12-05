@@ -1,0 +1,39 @@
+{
+	"IPTU":{
+  		
+      "cidadao":{ 
+      	"nome":"-",
+        "cpf":"-", 
+      	"endereco":{
+      		"rua":"-","numero":"-","bairro":"-", "cep":"-", "estado":"-", "cidade":"-"}
+      },
+      
+      
+      "informacoes":{
+          "indiceCadastral": "-", 
+          "numeroGuia": "-", 
+          "dataVencimento": "-",
+          "lancamento": "-"
+      },//fim info
+       
+  	"dadosCadastrais":{
+              "tipoImovel": "-",
+              "tipoLancamento": "-",
+              "areaTerreno": "-",
+              "areaConstruida": "-",
+              "fracaoIdeal": "-",
+              "zona": {"homogenea": "-", "uso": "-"},
+              "classificacao":"-",
+              "padraoAcabamento":"-"
+      },
+      
+    "calculoImposto":{
+      		"valorVenal":"-"
+      },
+  	
+  	"opcoesPagamento": [
+    		{"id": "-", "numParcela": "-", "valor": "-"}
+  	]
+  	
+    }//fim iptu	
+}
